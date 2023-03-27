@@ -1,0 +1,3 @@
+/home/thanhminh/ahayo/cmake-build-debug/CMakeFiles/ahayo.dir
+/home/thanhminh/ahayo/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/thanhminh/ahayo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
