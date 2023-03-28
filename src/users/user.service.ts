@@ -1,10 +1,11 @@
+import { Inject, Injectable } from "@nestjs/common";
 import { UserDto } from "../user.dto";
-import { UserRepository } from "./user.repository";
 
+@Injectable()
 export class UserService {
-  constructor(userRepository: UserRepository) {
-  }
+
   createUser(user: any) : any {
+
     user.createdAt= new Date();
     user.id=1;
     user.updateAt = new Date();
