@@ -1,12 +1,10 @@
 import { Module } from "@nestjs/common";
 import { StoreConfig } from "src/store/store.config";
+import { StoreService } from "./store.service";
 import { UserController } from "./users.controller";
 import { UserService } from "./users.service";
-
-
-const configLivee = {
-  appId: 'Livee001',
-  appSecret: 'Livee001'
+function createStore(): StoreService {
+  return new StoreService();
 }
 
 @Module({
@@ -21,6 +19,10 @@ const configLivee = {
 
       } as StoreConfig,
     },
+    {
+      provide: 'STORE_SERVICE',
+      useFactory: createStore,
+    }
   ],
 })
 
