@@ -3,7 +3,8 @@ import { StoreConfig } from "src/store/store.config";
 import { StoreService } from "./store.service";
 import { UserController } from "./users.controller";
 import { UserService } from "./users.service";
-function createStore(): StoreService {
+function createStore(config: StoreConfig): StoreService {
+  console.log(config);
   return new StoreService();
 }
 
@@ -22,6 +23,12 @@ function createStore(): StoreService {
     {
       provide: 'STORE_SERVICE',
       useFactory: createStore,
+      inject: [
+        {
+          token: 'STORE_CONFIG',
+          optional: true,
+        }
+      ]
     }
   ],
 })
