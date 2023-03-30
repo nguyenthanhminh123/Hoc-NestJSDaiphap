@@ -1,36 +1,14 @@
-import { Module } from "@nestjs/common";
-import { StoreConfig } from "src/store/store.config";
-import { StoreService } from "./store.service";
-import { UserController } from "./users.controller";
-import { UserService } from "./users.service";
-function createStore(config: StoreConfig): StoreService {
-  console.log(config);
-  return new StoreService();
-}
+import { Module } from '@nestjs/common';
+import { UserController } from './user.controller';
+import { UserService } from './user.service';
 
 @Module({
-  controllers:[UserController],
-  providers:[
-    UserService,
+  controllers: [UserController],
+  providers: [
     {
-      provide: 'STORE_CONFIG',
-      useValue: {
-        dir: 'store',
-        path: 'user',
-
-      } as StoreConfig,
+      provide: 'USER_SERVICE_VU',
+      useClass: UserService,
     },
-    {
-      provide: 'STORE_SERVICE',
-      useFactory: createStore,
-      inject: [
-        {
-          token: 'STORE_CONFIG',
-          optional: true,
-        }
-      ]
-    }
   ],
 })
-
-export class UsersModule {}
+export class UserModule {}

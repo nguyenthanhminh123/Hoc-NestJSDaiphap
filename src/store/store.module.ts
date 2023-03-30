@@ -1,10 +1,9 @@
 import { Module } from "@nestjs/common";
 
-@Module(
-  {
+@Module{(
+  providers:[StoreService],
+})
 
-  }
-)
 export class StoreModule{
   
 }
