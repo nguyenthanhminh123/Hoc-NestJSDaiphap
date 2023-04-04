@@ -1,18 +1,23 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
-import { UserDto } from './user.dto';
-import { UserService } from './user.service';
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { UserDto } from "../user.dto";
+import { plainToClass } from "class-transformer";
+import { UserService } from "./user.service";
+import { UserRepository } from "./user.repository";
 
-@Controller('users')
+@Controller("users")
 export class UserController {
-  constructor(@Inject('USER_SERVICE_VU') private readonly userService: UserService) {}
-
+  userService: UserService;
+  constructor() {
+    const userRepository = new UserRepository();
+    this.userService = new UserService(userRepository);
+  }
   @Post()
-  createUser(@Body() user: UserDto): UserDto {
-    return this.userService.createUser(user);
+  createUser(@Body() user: UserDto): UserDto{
+    return this.userService.createUser(user)
+  }
+  @Get(':id')
+  getUserById(@Param('id')  id: number){
+    return 'test'
   }
 
-  @Get(':id')
-  getUserById(@Param('id') id: number) {
-    return 'Valid';
-  }
 }
